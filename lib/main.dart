@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_1/home_page.dart';
+import 'package:flutter_1/pages/home_page.dart';
+import 'package:flutter_1/pages/login_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +18,16 @@ class MyApp extends StatelessWidget {
     const pie = 3.14;
 
     return MaterialApp(
-      home: HomePage(),
+      themeMode: ThemeMode.light,
+      darkTheme: ThemeData(primarySwatch: Colors.deepPurple),
+      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      // home: HomePage(),
+      initialRoute: "/home",
+      routes: {
+        "/": (context) => LoginPage(),
+        "/login": (context) => LoginPage(),
+        "/home": (context) => HomePage()
+      },
     );
   }
 }
