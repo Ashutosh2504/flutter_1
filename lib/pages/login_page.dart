@@ -9,6 +9,20 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String _name = "";
   bool changeBtn = false;
+
+  final _formKey = GlobalKey<FormState>();
+
+  moveToHome(BuildContext context) async {
+    setState(() {
+      changeBtn = true;
+    });
+    await Future.delayed(Duration(seconds: 1));
+    await Navigator.pushNamed(context, MyRoutes.homeRoute);
+    setState(() {
+      changeBtn = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -35,69 +49,70 @@ class _LoginPageState extends State<LoginPage> {
               padding:
                   const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    TextFormField(
-                      onChanged: (value) {
-                        _name = value;
-                        setState(() {});
-                      },
-                      decoration: InputDecoration(
-                        hintText: "Enter username",
-                        label: Text("Username"),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                          hintText: "Enter username",
+                          label: Text("Username"),
+                        ),
+                        onChanged: (value) {
+                          _name = value;
+                          setState(() {});
+                        },
+                        // validator: (value) {
+                        //   if (value.isEmpty) {
+                        //     return "Username cannot be empty";
+                        //   }
+                        //   return null;
+                        // },
                       ),
-                    ),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: "Enter password",
-                        label: Text("Password"),
+                      TextFormField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: "Enter password",
+                          label: Text("Password"),
+                        ),
+                        // validator: (value ) {
+                        //   if (value.length<6) {
+                        //     return "Username cannot be empty";
+                        //   }
+                        //   return null;
+                        // },
                       ),
-                    ),
-                    SizedBox(
-                      // creates empty box of specified height and we can add child also in it.
-                      height: 40,
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        setState(() {
-                          changeBtn = true;
-                        });
-                        await Future.delayed(Duration(seconds: 1));
-                        Navigator.pushNamed(context, MyRoutes.homeRoute);
-                      },
-                      child: AnimatedContainer(
-                        duration: Duration(seconds: 1),
-                        alignment: Alignment.center,
-                        width: changeBtn ? 60 : 150,
-                        height: 50,
-                        child: changeBtn
-                            ? Icon(
-                                Icons.done,
-                                color: Colors.white,
-                              )
-                            : Text(
-                                "Login",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                        decoration: BoxDecoration(
-                            color: Colors.deepPurple,
-                            borderRadius: changeBtn
-                                ? BorderRadius.circular(50)
-                                : BorderRadius.circular(8)),
+                      SizedBox(
+                        // creates empty box of specified height and we can add child also in it.
+                        height: 40,
                       ),
-                    ),
-                    // ElevatedButton(
-                    //   style: TextButton.styleFrom(minimumSize: Size(150, 50)),
-                    //   child: Text("Login"),
-                    //   onPressed: () {
-                    //     Navigator.pushNamed(context, MyRoutes.homeRoute);
-                    //   },
-                    // )
-                  ],
+                      Material(
+                        color: Colors.blue[900],
+                        borderRadius: BorderRadius.circular(changeBtn ? 50 : 8),
+                        child: InkWell(
+                          onTap: () => moveToHome(context),
+                          child: AnimatedContainer(
+                            duration: Duration(seconds: 1),
+                            alignment: Alignment.center,
+                            width: changeBtn ? 60 : 150,
+                            height: 50,
+                            child: changeBtn
+                                ? Icon(
+                                    Icons.done,
+                                    color: Colors.white,
+                                  )
+                                : Text(
+                                    "Login",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
