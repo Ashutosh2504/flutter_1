@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_1/util/routes.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -26,32 +27,35 @@ class LoginPage extends StatelessWidget {
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
-              child: Column(
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Enter username",
-                      label: Text("Username"),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "Enter username",
+                        label: Text("Username"),
+                      ),
                     ),
-                  ),
-                  TextFormField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: "Enter password",
-                      label: Text("Password"),
+                    TextFormField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: "Enter password",
+                        label: Text("Password"),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    // creates empty box of specified height and we can add child also in it.
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                    child: Text("Login"),
-                    onPressed: () {
-                      print("Logged in ");
-                    },
-                  )
-                ],
+                    SizedBox(
+                      // creates empty box of specified height and we can add child also in it.
+                      height: 40,
+                    ),
+                    ElevatedButton(
+                      style: TextButton.styleFrom(minimumSize: Size(150, 50)),
+                      child: Text("Login"),
+                      onPressed: () {
+                        Navigator.pushNamed(context, MyRoutes.homeRoute);
+                      },
+                    )
+                  ],
+                ),
               ),
             ),
           ],
