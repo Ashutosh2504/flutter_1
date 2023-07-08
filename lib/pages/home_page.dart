@@ -16,6 +16,15 @@ class _HomePageState extends State<HomePage> {
 
   final String name = "Ashutosh";
 
+  int _currentIndex = 0;
+
+  final tabs = [
+    Center(child: Text("Home")),
+    Center(child: Text("Chat")),
+    Center(child: Text("Search")),
+    Center(child: Text("Account"))
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -23,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void loadData() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     //rootBundle is used to get the JSON from files
     var catalogJson = await rootBundle.loadString("assets/files/catalog.json");
     var decodedCatalog = jsonDecode(catalogJson);
@@ -48,30 +57,31 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16.0),
         child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
             ? GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 15,
-                    crossAxisCount: 3),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    crossAxisCount: 2),
                 itemBuilder: (context, index) {
                   final item = CatalogModel.items[index];
-                  return Card(
-                      clipBehavior: Clip.antiAlias,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      child: GridTile(
-                        header: Container(
-                          child: Text(
-                            item.name,
-                            style: TextStyle(color: Colors.white),
+                  return Column(
+                    children: [
+                      Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                            fit: BoxFit.contain,
+                            image: AssetImage("assets/images/dr2.png"),
                           ),
-                          padding: EdgeInsets.all(12),
-                          decoration: BoxDecoration(color: Colors.deepPurple),
                         ),
-                        child: Image.asset(
-                          "assets/images/dr2.png",
-                        ),
-                        footer: Text(item.price.toString()),
-                      ));
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("Doctor")
+                    ],
+                  );
                 },
                 itemCount: CatalogModel.items.length,
               )
@@ -80,6 +90,32 @@ class _HomePageState extends State<HomePage> {
               ),
       ),
       drawer: MyDrawer(),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        items: [
+          BottomNavigationBarItem(
+              label: "Home",
+              icon: Icon(Icons.home),
+              backgroundColor: Colors.deepPurple),
+          BottomNavigationBarItem(
+              label: "Chat",
+              icon: Icon(Icons.chat),
+              backgroundColor: Colors.deepPurple),
+          BottomNavigationBarItem(
+              label: "Search",
+              icon: Icon(Icons.search),
+              backgroundColor: Colors.deepPurple),
+          BottomNavigationBarItem(
+              label: "Account",
+              icon: Icon(Icons.person),
+              backgroundColor: Colors.deepPurple),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+      ),
     );
   }
 }
