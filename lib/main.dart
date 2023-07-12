@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_1/pages/home_page.dart';
 import 'package:flutter_1/pages/login_page.dart';
+import 'package:flutter_1/pages/splash_screen.dart';
 import 'package:flutter_1/util/routes.dart';
 import 'package:flutter_1/widgets/themes.dart';
 
@@ -22,19 +23,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       themeMode: ThemeMode.light,
 
+      debugShowCheckedModeBanner: false,
+
       darkTheme: MyTheme.darkTheme,
 
       theme: MyTheme.lightTheme,
 
-      home: SplashScreen(),
-
       // home: HomePage(),
-      initialRoute: MyRoutes.loginRoute,
+      home: MySpashScreen(),
+      //initialRoute: MyRoutes.loginRoute,
 
       routes: {
-        "/": (context) => LoginPage(),
+        // "/": (context) => LoginPage(),
         MyRoutes.loginRoute: (context) => LoginPage(),
-        MyRoutes.homeRoute: (context) => HomePage()
+        MyRoutes.homeRoute: (context) => HomePage(),
+        MyRoutes.splashScreen: (context) => MySpashScreen(),
       },
     );
   }

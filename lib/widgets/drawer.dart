@@ -19,8 +19,8 @@ class MyDrawer extends StatelessWidget {
                   margin: EdgeInsets.zero,
                   accountName: Text("Ashutosh Patil"),
                   accountEmail: Text("ashutosh@gmail.com"),
-                  currentAccountPicture:
-                      CircleAvatar(backgroundImage: NetworkImage(imageUrl)),
+                  currentAccountPicture: CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/dr2.png")),
                 )),
             ListTile(
               leading: Icon(CupertinoIcons.home, color: Colors.white),

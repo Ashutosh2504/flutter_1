@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_1/models/catalog.dart';
+import 'package:flutter_1/pages/login_page.dart';
 import 'package:flutter_1/widgets/drawer.dart';
 import 'package:flutter_1/widgets/item_widget.dart';
 
@@ -32,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void loadData() async {
-    await Future.delayed(Duration(seconds: 1));
+    // await Future.delayed(Duration(seconds: 1));
     //rootBundle is used to get the JSON from files
     var catalogJson = await rootBundle.loadString("assets/files/catalog.json");
     var decodedCatalog = jsonDecode(catalogJson);
@@ -46,11 +47,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Widget child = Container();
+
     //final List dummyList = List.generate(6, (index) => CatalogModel.items[0]);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Health App',
+          'Global Health Forum',
         ),
       ),
       body: Padding(
@@ -63,24 +66,28 @@ class _HomePageState extends State<HomePage> {
                     crossAxisCount: 2),
                 itemBuilder: (context, index) {
                   final item = CatalogModel.items[index];
-                  return Column(
-                    children: [
-                      Container(
-                        height: 100,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          image: DecorationImage(
-                            fit: BoxFit.contain,
-                            image: AssetImage("assets/images/dr2.png"),
+                  Image img = Image.asset(item.image);
+                  return Card(
+                    
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                              fit: BoxFit.contain,
+                              image: img.image,
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(item.name)
-                    ],
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(item.name)
+                      ],
+                    ),
                   );
                 },
                 itemCount: CatalogModel.items.length,
@@ -108,6 +115,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
               label: "Account",
               icon: Icon(Icons.person),
+              backgroundColor: Colors.deepPurple),
+          BottomNavigationBarItem(
+              label: "Contact Us",
+              icon: Icon(Icons.contact_phone_outlined),
               backgroundColor: Colors.deepPurple),
         ],
         onTap: (index) {

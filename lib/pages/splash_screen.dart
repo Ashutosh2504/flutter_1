@@ -3,19 +3,19 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_1/pages/login_page.dart';
 
-class SpashScreen extends StatefulWidget {
-  const SpashScreen({super.key});
+class MySpashScreen extends StatefulWidget {
+  const MySpashScreen({super.key});
 
   @override
-  State<SpashScreen> createState() => _SpashScreenState();
+  State<MySpashScreen> createState() => _MySpashScreenState();
 }
 
-class _SpashScreenState extends State<SpashScreen> {
+class _MySpashScreenState extends State<MySpashScreen> {
   @override
   void initState() {
     super.initState();
 
-    Timer(Duration(seconds: 2), () {
+    Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => LoginPage()));
     });
@@ -25,7 +25,13 @@ class _SpashScreenState extends State<SpashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Image.asset("assets/images/spashscreen.png"),
+        child: Image.asset(
+          "assets/images/spashscreen.png",
+          fit: BoxFit.fill,
+          height: double.infinity,
+          width: double.infinity,
+          alignment: Alignment.center,
+        ),
       ),
     );
   }
