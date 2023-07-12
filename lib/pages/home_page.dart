@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         height: 10,
                       ),
-                      Text("Doctor")
+                      Text(item.name)
                     ],
                   );
                 },

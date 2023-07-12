@@ -26,6 +26,8 @@ class MyApp extends StatelessWidget {
 
       theme: MyTheme.lightTheme,
 
+      home: SplashScreen(),
+
       // home: HomePage(),
       initialRoute: MyRoutes.loginRoute,
 
