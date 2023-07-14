@@ -6,7 +6,7 @@
             "desc": "Apple iPhone 12th generation",
             "price": 999,
             "color": "#33505a",
-            "image": "assets/images/dr2.png"
+            "image": "assets/images/speakers.png"
         },
         {
             "id": 2,
@@ -14,7 +14,7 @@
             "desc": "Google Pixel phone 5th generation",
             "price": 699,
             "color": "#00ac51",
-            "image": "assets/images/ss.png"
+            "image": "assets/images/programs.png"
         },
         {
             "id": 3,
@@ -22,7 +22,7 @@
             "desc": "Apple Macbook air with apple silicon",
             "price": 1099,
             "color": "#e0bfae",
-            "image": "assets/images/board.png"
+            "image": "assets/images/meeting.png"
         },
         {
             "id": 4,
@@ -38,7 +38,7 @@
             "desc": "Apple Aipods Pro 1st generation",
             "price": 200,
             "color": "#e3e4e9",
-            "image": "assets/images/participate.png"
+            "image": "assets/images/participation.png"
         },
         {
             "id": 6,
@@ -46,7 +46,7 @@
             "desc": "Apple iPad Pro 2020 edition",
             "price": 799,
             "color": "#f73984",
-            "image": "assets/images/whoweare.png"
+            "image": "assets/images/doctors.png"
         }
     ]
 }

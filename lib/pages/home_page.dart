@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_1/models/catalog.dart';
+import 'package:flutter_1/pages/home_page_UI.dart';
 import 'package:flutter_1/pages/login_page.dart';
 import 'package:flutter_1/widgets/drawer.dart';
 import 'package:flutter_1/widgets/item_widget.dart';
@@ -20,10 +21,15 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   final tabs = [
-    Center(child: Text("Home")),
+    Center(
+      child: MyHomePageUI(),
+    ),
     Center(child: Text("Chat")),
     Center(child: Text("Search")),
-    Center(child: Text("Account"))
+    Center(
+      child: Text("Account"),
+    ),
+    Center(child: Text("Support")),
   ];
 
   @override
@@ -47,8 +53,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget child = Container();
-
     //final List dummyList = List.generate(6, (index) => CatalogModel.items[0]);
     return Scaffold(
       appBar: AppBar(
@@ -56,46 +60,7 @@ class _HomePageState extends State<HomePage> {
           'Global Health Forum',
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
-            ? GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    crossAxisCount: 2),
-                itemBuilder: (context, index) {
-                  final item = CatalogModel.items[index];
-                  Image img = Image.asset(item.image);
-                  return Card(
-                    
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 100,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            image: DecorationImage(
-                              fit: BoxFit.contain,
-                              image: img.image,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(item.name)
-                      ],
-                    ),
-                  );
-                },
-                itemCount: CatalogModel.items.length,
-              )
-            : Center(
-                child: CircularProgressIndicator(),
-              ),
-      ),
+      body: tabs[_currentIndex],
       drawer: MyDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
